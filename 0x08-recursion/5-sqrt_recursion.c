@@ -15,7 +15,7 @@ int _proceso(int i, int n)
 	return (_proceso(i + 1, n));
 }
 
-#include "holberton.h"
+#include "main.h"
 /**
  * _sqrt_recursion - returns the natural square root of a number.
  * @n: number..
