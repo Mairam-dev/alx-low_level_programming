@@ -2,20 +2,16 @@
 #include <stdlib.h>
 
 /**
- * free_dog - free dog structure.
+ * free_dog - free(memory) dah dog and get fined by animal control
+ * @d: pointer to dog stuct in memory.
  *
- * @d: pointer;
+ * Return: nothing
  */
-
 void free_dog(dog_t *d)
 {
-	if (d)
-	{
-		if (d->owner)
-			free(d->owner);
-		if (d->name)
-			free(d->name);
-
-		free(d);
-	}
+	if (!d)
+		return;
+	free(d->name);
+	free(d->owner);
+	free(d);
 }
