@@ -1,39 +1,38 @@
-#include "main.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main -entry point
- * @argc: quantity arguments
- * @argv: arguments
- * Return: Always 0 (Success)
+ * main - function to print out the change that needs to given
+ * @argc: number of arguments to be passed
+ * @argv: number of variables to calculate
+ * Return: always 0 for sucess
  */
+
 int main(int argc, char **argv)
 {
+	int total, change;
 
-	int num[5] = {25, 10, 5, 2, 1};
-	int i = 0, m = 0, amount = 0;
-
-	if (argc == 1)
+	if (argc < 2)
 	{
-		puts("Error\n");
+		printf("Error\n");
 		return (1);
 	}
-	amount = atoi(argv[1]);
 
-	if (amount < 0)
+	change = atoi(argv[1]);
+
+	for (total = 0; change > 0; total++)
 	{
-		puts("0\n");
-		return (0);
+		if (change - 25 >= 0)
+			change = change - 25;
+		else if (change - 10 >= 0)
+			change = change - 10;
+		else if (change - 5 >= 0)
+			change = change - 5;
+		else if (change - 2 >= 0)
+			change = change - 2;
+		else if (change - 1 >= 0)
+			change = change - 1;
 	}
-	for (i = 0; i < 5; i++)
-	{
-		if (amount >= num[i])
-		{
-			amount -= num[i];
-			m++;
-		}
-	}
-	printf("%d\n", m - 1);
+	printf("%d\n", total);
 	return (0);
 }
