@@ -1,38 +1,36 @@
 #include "lists.h"
 /**
- * delete_nodeint_at_index -  deletes node at a given position.
- * @head: the first element
- * @idx: index of element to delete
+ * delete_nodeint_at_index - Deletes the node at index of a listint_t list.
+ * @head: head of linked list
+ * @index: The index of the node that should be deleted. Index starts at 0.
  *
- * Return: 1 or -1
+ * Return: 1 if it succeeded, -1 if it failed
  */
-int delete_nodeint_at_index(listint_t **head, unsigned int idx)
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	listint_t *to_delete, *idx_node;
+	listint_t *index_node, *tmp_node = *head;
 	unsigned int i = 0;
 
-	if (head == NULL)
-		return (-1);
-	idx_node = *head;
-	if (*head == NULL && idx == 0)
+	if (tmp_node && (index == 0))
 	{
-		to_delete = *head;
-		free(to_delete);
+		*head = tmp_node->next;
+		free(tmp_node);
 		return (1);
 	}
-	if (*head != NULL && idx == 0)
+	while (tmp_node)
 	{
-		to_delete = *head;
-		*head = to_delete->next;
-		free(to_delete);
-		return (1);
+		if (i + 1 == index)
+		{
+			index_node = tmp_node->next;
+			if (index_node)
+			{
+				tmp_node->next = index_node->next;
+				free(index_node);
+				return (1);
+			}
+		}
+		tmp_node = tmp_node->next;
+		i++;
 	}
-	for (; i < idx - 1 && idx_node != NULL; i++)
-		idx_node = (idx_node->next) ? idx_node->next : NULL;
-	if (idx_node == NULL || idx_node->next == NULL)
-		return (-1);
-	to_delete = idx_node->next;
-	idx_node->next = (to_delete->next) ? to_delete->next : NULL;
-	free(to_delete);
-	return (1);
+	return (-1);
 }
